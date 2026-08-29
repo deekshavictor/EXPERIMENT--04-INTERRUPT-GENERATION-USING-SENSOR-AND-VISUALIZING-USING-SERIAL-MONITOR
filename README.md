@@ -426,14 +426,12 @@ EXPERIMENT 4(B)
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stdio.h"
-#include"stdbool.h"
+#include "stdbool.h"
 bool IRSENSOR;
 void IRPAIR();
-
 #if defined(__GNUC__)
 #define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
 #endif
-
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -514,32 +512,32 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-         IRPAIR();
+	  IRPAIR();
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
 }
+
 void IRPAIR()
 {
-IRSENSOR = HAL_GPIO_ReadPin(GPIOB,GPIO_PIN_4);
-if(IRSENSOR==1)
-{
-HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_SET);
-printf("Obstacle Not Detected\n");
-HAL_Delay(1000);
+	IRSENSOR = HAL_GPIO_ReadPin(GPIOB,GPIO_PIN_4);
+	if(IRSENSOR==0)
+	{
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_SET);
+		printf("Obstacle Detected\n");
+		HAL_Delay(1000);
+	}
+	else
+	{
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_RESET);
+		printf("Obstacle Not Detected\n");
+		HAL_Delay(1000);
+	}
 }
-else
-{
-HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_RESET);
-printf("Obstacle Detected\n");
-HAL_Delay(1000);
-}
-}
-
 PUTCHAR_PROTOTYPE
 {
-HAL_UART_Transmit(&huart2,(uint8_t*)&ch,1,0xFFFF);
-return ch;
+	HAL_UART_Transmit(&huart2,(uint8_t*)&ch,1,0xFFFF);
+	return ch;
 }
 
 /**
@@ -715,13 +713,8 @@ void assert_failed(uint8_t *file, uint32_t line)
  <img width="1600" height="900" alt="image" src="https://github.com/user-attachments/assets/62b08e9c-9dca-49f2-8aeb-61b169854cf2" />
 
  ## Circuit board :
- EXPERIMENT 4(A):
- <img width="1200" height="1600" alt="image" src="https://github.com/user-attachments/assets/f0b1d853-131f-4060-bcff-4a62646a546f" />
-<img width="1200" height="1600" alt="image" src="https://github.com/user-attachments/assets/68cc97a9-bd82-40f1-8c53-c6c1af0bd51e" />
-
- EXPERIMENT 4(B):
- <img width="1200" height="1600" alt="image" src="https://github.com/user-attachments/assets/8979e7b4-b862-43ef-b8f3-7c83f2f65e65" />
-<img width="1200" height="1600" alt="image" src="https://github.com/user-attachments/assets/d804d6fd-e948-43fa-91ef-049c5e78ad36" />
+<img width="1200" height="1600" alt="image" src="https://github.com/user-attachments/assets/f9e3d6d1-9079-4b42-9a1b-60df17f5fec3" />
+<img width="1200" height="1600" alt="image" src="https://github.com/user-attachments/assets/be856906-9c32-4ff9-8589-552e15a2d11a" />
 
 ## Result :
 Interfacing a  IR SENSOR and interrupt is generated using external interrupt mode , visualized on serial port 
